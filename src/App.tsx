@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Landing } from "./pages/Landing";
 import { PatientDashboard } from "./pages/PatientDashboard";
 import { TherapistDashboard } from "./pages/TherapistDashboard";
+import { Auth } from "./pages/Auth";
+import { Profile } from "./pages/Profile";
+import { TherapyDetail } from "./pages/TherapyDetail";
+import { Reports } from "./pages/Reports";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import NotFound from "./pages/NotFound";
@@ -23,8 +27,12 @@ const App = () => (
           <main className="flex-1">
             <Routes>
               <Route path="/" element={<Landing />} />
+              <Route path="/auth" element={<Auth />} />
               <Route path="/patient" element={<PatientDashboard />} />
               <Route path="/therapist" element={<TherapistDashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/therapy/:id" element={<TherapyDetail />} />
+              <Route path="/reports" element={<Reports />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

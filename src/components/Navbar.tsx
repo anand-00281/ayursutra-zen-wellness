@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Leaf, Home, Users, Stethoscope, Info } from 'lucide-react';
+import { Leaf, Home, Users, Stethoscope, Info, LogIn, UserPlus } from 'lucide-react';
+import { NotificationDropdown } from './NotificationDropdown';
 
 export const Navbar = () => {
   const location = useLocation();
@@ -69,13 +70,20 @@ export const Navbar = () => {
             </Button>
           </div>
           
-          {/* CTA Buttons */}
+          {/* Notifications & CTA Buttons */}
           <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/patient">Patient Login</Link>
+            <NotificationDropdown />
+            <Button variant="outline" size="sm" asChild className="hidden sm:flex">
+              <Link to="/auth" className="flex items-center space-x-2">
+                <LogIn className="h-4 w-4" />
+                <span>Login</span>
+              </Link>
             </Button>
             <Button variant="healing" size="sm" asChild>
-              <Link to="/therapist">Therapist Portal</Link>
+              <Link to="/auth" className="flex items-center space-x-2">
+                <UserPlus className="h-4 w-4" />
+                <span>Sign Up</span>
+              </Link>
             </Button>
           </div>
         </div>
