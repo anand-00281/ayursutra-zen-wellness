@@ -10,6 +10,10 @@ import { Auth } from "./pages/Auth";
 import { Profile } from "./pages/Profile";
 import { TherapyDetail } from "./pages/TherapyDetail";
 import { Reports } from "./pages/Reports";
+import { Appointments } from "./pages/Appointments";
+import { Chat } from "./pages/Chat";
+import { KnowledgeHub } from "./pages/KnowledgeHub";
+import { Settings } from "./pages/Settings";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import NotFound from "./pages/NotFound";
@@ -33,6 +37,10 @@ const App = () => (
               <Route path="/profile" element={<Profile />} />
               <Route path="/therapy/:id" element={<TherapyDetail />} />
               <Route path="/reports" element={<Reports />} />
+              <Route path="/appointments" element={<Appointments />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/knowledge-hub" element={<KnowledgeHub />} />
+              <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
