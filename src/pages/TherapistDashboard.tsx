@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -12,9 +12,12 @@ import {
   UserCheck,
   AlertCircle,
   TrendingUp,
-  MapPin
+  MapPin,
+  ClipboardList
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { PanchakarmaTimeline } from '@/components/PanchakarmaTimeline';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const patientData = [
   { name: 'Anjali Sharma', therapy: 'Abhyanga', time: '10:00 AM', status: 'Scheduled', progress: 85 },
@@ -40,6 +43,8 @@ const workloadData = [
 ];
 
 export const TherapistDashboard = () => {
+  const [selectedPatient, setSelectedPatient] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen py-8">
       <div className="container mx-auto px-4 space-y-8">
@@ -158,9 +163,20 @@ export const TherapistDashboard = () => {
                             ></div>
                           </div>
                         </div>
-                        <Button variant="outline" size="sm">
-                          View Details
-                        </Button>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" size="sm" className="gap-1">
+                              <ClipboardList className="h-3.5 w-3.5" />
+                              Timeline
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
+                            <DialogHeader>
+                              <DialogTitle>Treatment Timeline</DialogTitle>
+                            </DialogHeader>
+                            <PanchakarmaTimeline patientName={patient.name} isTherapistView />
+                          </DialogContent>
+                        </Dialog>
                       </div>
                     </div>
                   ))}

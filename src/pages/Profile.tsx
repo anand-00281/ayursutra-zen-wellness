@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { User, Mail, Phone, MapPin, Calendar, Save, Edit } from 'lucide-react';
+import { PanchakarmaTimeline } from '@/components/PanchakarmaTimeline';
 
 export const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -194,6 +195,11 @@ export const Profile = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Panchakarma Treatment Timeline */}
+          <div className="md:col-span-3">
+            <PanchakarmaTimeline patientName={profileData.name} />
+          </div>
         </div>
       </motion.div>
     </div>
