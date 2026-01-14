@@ -13,11 +13,13 @@ import {
   AlertCircle,
   TrendingUp,
   MapPin,
-  ClipboardList
+  ClipboardList,
+  BarChart3
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { PanchakarmaTimeline } from '@/components/PanchakarmaTimeline';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Link } from 'react-router-dom';
 
 const patientData = [
   { name: 'Anjali Sharma', therapy: 'Abhyanga', time: '10:00 AM', status: 'Scheduled', progress: 85 },
@@ -49,11 +51,26 @@ export const TherapistDashboard = () => {
     <div className="min-h-screen py-8">
       <div className="container mx-auto px-4 space-y-8">
         {/* Welcome Section */}
-        <div className="space-y-2">
-          <h1 className="text-3xl font-display font-bold text-foreground">
-            🙏 Welcome, Dr. Sharma
-          </h1>
-          <p className="text-muted-foreground">Managing healing journeys with compassion and expertise</p>
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div className="space-y-2">
+            <h1 className="text-3xl font-display font-bold text-foreground">
+              🙏 Welcome, Dr. Sharma
+            </h1>
+            <p className="text-muted-foreground">
+              Managing healing journeys with compassion and expertise
+            </p>
+          </div>
+          {/* Quick link to analytics */}
+          <Button
+            asChild
+            variant="outline"
+            className="gap-2"
+          >
+            <Link to="/reports">
+              <BarChart3 className="h-4 w-4" />
+              <span>View Clinic Reports</span>
+            </Link>
+          </Button>
         </div>
 
         {/* Stats Overview */}

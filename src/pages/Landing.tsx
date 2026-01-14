@@ -47,13 +47,13 @@ export const Landing = () => {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button variant="healing" size="lg" asChild>
-                  <Link to="/patient" className="flex items-center space-x-2">
+                  <Link to="/auth" className="flex items-center space-x-2">
                     <Users className="h-5 w-5" />
                     <span>Register as Patient</span>
                   </Link>
                 </Button>
                 <Button variant="therapeutic" size="lg" asChild>
-                  <Link to="/therapist" className="flex items-center space-x-2">
+                  <Link to="/auth" className="flex items-center space-x-2">
                     <Shield className="h-5 w-5" />
                     <span>Login as Therapist</span>
                   </Link>
@@ -119,7 +119,7 @@ export const Landing = () => {
             </p>
             <div className="flex justify-center">
               <Button variant="healing" size="lg" asChild>
-                <Link to="/patient" className="flex items-center space-x-2">
+                <Link to="/auth" className="flex items-center space-x-2">
                   <Leaf className="h-5 w-5" />
                   <span>Begin Your Journey</span>
                 </Link>

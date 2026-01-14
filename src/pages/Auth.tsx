@@ -8,14 +8,35 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Leaf, User, Stethoscope } from 'lucide-react';
+import { useAuthRole } from '@/context/AuthRole';
 
 export const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [userRole, setUserRole] = useState<'patient' | 'therapist'>('patient');
   const navigate = useNavigate();
+  const { setRole } = useAuthRole();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    // Get user name from form
+    let userName = '';
+    if (isLogin) {
+      // For login, use email as identifier (or you can get name from API)
+      userName = formData.get('email')?.toString() || '';
+      // Extract name from email for display (or use a default)
+      userName = userName.split('@')[0] || (userRole === 'patient' ? 'Anjali Sharma' : 'Dr. Sharma');
+    } else {
+      // For signup, get name from name field
+      userName = formData.get('name')?.toString() || 
+                 (userRole === 'patient' ? 'Anjali Sharma' : 'Dr. Rajesh Gupta');
+    }
+    
+    // Store role and name so dashboards and navbar know what to show
+    setRole(userRole, userName);
+
     // Static navigation based on role
     if (userRole === 'patient') {
       navigate('/patient');
@@ -95,15 +116,17 @@ export const Auth = () => {
                     <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
                       placeholder="your@email.com"
-                      defaultValue="anjali@ayursutra.com"
+                      defaultValue={userRole === 'patient' ? 'anjali@ayursutra.com' : 'dr.sharma@ayursutra.com'}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
                     <Input
                       id="password"
+                      name="password"
                       type="password"
                       placeholder="••••••••"
                       defaultValue="password123"
@@ -121,6 +144,7 @@ export const Auth = () => {
                     <Label htmlFor="name">Full Name</Label>
                     <Input
                       id="name"
+                      name="name"
                       placeholder="Your full name"
                       defaultValue={userRole === 'patient' ? 'Anjali Sharma' : 'Dr. Rajesh Gupta'}
                     />
@@ -129,6 +153,7 @@ export const Auth = () => {
                     <Label htmlFor="signup-email">Email</Label>
                     <Input
                       id="signup-email"
+                      name="email"
                       type="email"
                       placeholder="your@email.com"
                       defaultValue={userRole === 'patient' ? 'anjali@ayursutra.com' : 'dr.gupta@ayursutra.com'}
@@ -138,6 +163,7 @@ export const Auth = () => {
                     <Label htmlFor="signup-password">Password</Label>
                     <Input
                       id="signup-password"
+                      name="password"
                       type="password"
                       placeholder="••••••••"
                     />
@@ -146,6 +172,7 @@ export const Auth = () => {
                     <Label htmlFor="confirm-password">Confirm Password</Label>
                     <Input
                       id="confirm-password"
+                      name="confirm-password"
                       type="password"
                       placeholder="••••••••"
                     />
